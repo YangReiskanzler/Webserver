@@ -13,17 +13,18 @@ if ($conn->connect_error) {
 }
 
 //insert data into database
-$stmt = $conn->prepare ("INSERT INTO formular_daten (vorname, nachname, email, nachricht)
-VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare ("INSERT INTO formular_daten (vorname, nachname, email, nachricht, zahl)
+VALUES (?, ?, ?, ?,?)");
 
 //get data from form
 $vorname = $_POST["vorname"];
 $nachname = $_POST["nachname"];
 $email = $_POST["email"];
 $nachricht = $_POST["nachricht"];
+$zahl = $_POST["zahl"];
 
 //bind parameters
-$stmt->bind_param("ssss", $vorname, $nachname, $email, $nachricht);
+$stmt->bind_param("ssssi", $vorname, $nachname, $email, $nachricht, $zahl);
 $stmt->execute();
 
 //write data to file
